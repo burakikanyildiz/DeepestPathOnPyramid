@@ -1,3 +1,7 @@
+############################
+##Author: Burak İkan Yıldız##
+############################
+
 import sys
 
 def isPrime(n): 
@@ -37,6 +41,8 @@ for i in range(len(lines)):
     else:
       table[i][j]=int(lines[i][j])
 
+#Filling the table from top to bottom, maximum of line in which found at least 
+# one positive number is the answer
 for i in range(1,len(lines)):
   for j in range(i+1):
     if j==0:
