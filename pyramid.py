@@ -29,15 +29,30 @@ numberOfLines=len(lines)
 
 table=[[0]*len(lines) for j in range(len(lines))]
 
+#make prime numbers -inf
 for i in range(len(lines)):
   for j in range(len(lines[i])):
     if isPrime(int(lines[i][j])):
       table[i][j]=-99999999
     else:
       table[i][j]=int(lines[i][j])
-for i in range(len(lines)-2,-1,-1):
-  for j in range(i,-1,-1):
-    if table[i][j]!=-99999999:
-      table[i][j]=max(table[i][j]+table[i+1][j],table[i][j]+table[i+1][j+1])
 
-print(table[0][0])
+for i in range(1,len(lines)):
+  for j in range(i+1):
+    if j==0:
+      table[i][j]=table[i][j]+table[i-1][j]
+    elif j==i:
+      table[i][j]=table[i][j]+table[i-1][j-1]
+    else:
+      table[i][j]=max(table[i][j]+table[i-1][j-1],table[i][j]+table[i-1][j])
+found=False
+l=[]
+for i in range(len(lines)-1,-1,-1):
+  for j in range(i,-1,-1):
+    if table[i][j]>0:
+      found=True
+      l.append(table[i][j])
+  if found:
+    break
+
+print(max(l))
